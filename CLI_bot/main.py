@@ -1,8 +1,5 @@
 from commands_handler import *
 
-
-
-
 def main():
     contacts = dict()
     print("Welcome to the assistant bot!")
@@ -18,8 +15,12 @@ def main():
             print("How can I help you?")
         elif command == "add":
             print(add_contact(args, contacts))
+        elif command == "phone":
+            print(show_phone(args, contacts))
+        elif command == "change":
+            print(change_contact(args, contacts))
         elif command == "all":
-            print(show_all(contacts))            
+            show_all(contacts)        
         else:
             print("Invalid command.")
 

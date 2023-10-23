@@ -9,12 +9,15 @@ def add_contact(args, contacts):
     contacts[name] = phone
     return "Contact added."
 
-def change_contact():
-    pass
+def change_contact(args, contacts):
+    name, phone = args
+    contacts[name] = phone
+    return "Contact updated."
 
-def show_phone():
-    pass
+def show_phone(args, contacts):
+    phone = contacts.get(args[0])
+    return phone
 
 def show_all(contacts):
     for key, value in contacts.items():
-        return f"{key}: {value}"
+        print(f"{key}: {value}")
