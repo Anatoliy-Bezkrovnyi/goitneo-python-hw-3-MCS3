@@ -2,6 +2,7 @@ from Phone import Phone
 from Name import Name
 from Exceptions import *
 
+
 class Record:
     def __init__(self, name):
         self.name = Name(name)
@@ -45,6 +46,8 @@ class Record:
 
     def __str__(self):
         return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
+    
+record = Record("Test")
     
 
 

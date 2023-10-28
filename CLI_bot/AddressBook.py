@@ -2,13 +2,14 @@ from collections import UserDict
 from Record import Record
 from Exceptions import RecordIsAbsent
 
-class AddressBook(UserDict):    
+class AddressBook(UserDict):   
+
+    def __init__(self):
+        self.data = {} 
     
     def add_record(self, record):
-        self.record = Record(record) 
-        name = self.record.name
-        phones = "1234567890"     
-        self.data[str(name)] = phones
+        self.data[record.name.value] = record 
+        
 
 
     def find(self, name):
@@ -27,16 +28,6 @@ class AddressBook(UserDict):
         else:
             raise RecordIsAbsent
         
-    def __str__(self):
-        for key, value in self.data.items():
-            return f"{key} : {value}"
+    
         
 
-record = Record("Test")
-print(record)
-record.add_phone("1234567890")
-print(record)
-book = AddressBook()
-book.add_record(record)
-print(book)
-print(book.find("Test"))
