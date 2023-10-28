@@ -1,4 +1,4 @@
-from commands_handler import *
+from commands_handler import add_contact, show_phone, change_contact, show_all, parse_input
 
 def main():
     contacts = dict()
