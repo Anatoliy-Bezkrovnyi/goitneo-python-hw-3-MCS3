@@ -1,3 +1,6 @@
+from Record import Record
+from datetime import datetime
+
 def input_error(func):
     def inner(*args, **kwargs):
         try:
@@ -29,34 +32,50 @@ def parse_input(user_input):
     return cmd, *args
 
 @input_error
-def add_contact(args, contacts):
+def add_contact(args, book):
     
     name, phone = args
-    if name in contacts:
-        return "Name already exists, chose anther name or use 'change' command to update existing phone number"          
-    else:
-        contacts[name] = phone
-        return "Contact added."
+    record = Record(name)
+    record.add_phone(phone)
+    book.add_record(record)    
+    
     
 @input_error
-def change_contact(args, contacts):
+def change_contact(args, book):
     
-    name, phone = args
-    contacts[name] = phone
+    name, old_phone, new_phone = args
+    record = book.find(name)
+    record.edit_phone(old_phone, new_phone)
     return "Contact updated."
     
 @missing_name_for_search
 @contact_absent
-def show_phone(args, contacts):
+def show_phone(args, book):
     
     name = args[0]
-    phone = contacts[name]
-    return phone
+    record = book.find(name)
+    phones = record.show_phones()
+    return phones
     
 
-def show_all(contacts):
-    if len(contacts) > 0:
-        for key, value in contacts.items():
-            print(f"{key}: {value}")
-    else:
-        print("There are no contacts yet.")
+def show_all(book):
+    for name, record in book.data.items():
+        print(name, record)
+
+@missing_name_for_search
+def add_birthday(args, book):
+    name = args[0]
+    date = args[1]
+    record = book.find(name)
+    record.add_birthday(date)
+    
+@missing_name_for_search
+def show_birthday(args, book):
+    name = args[0]
+    record = book.find(name)
+    birthday = record.show_birthday()
+    return birthday
+
+def birthdays(book):
+    book.show_birthdays()
+

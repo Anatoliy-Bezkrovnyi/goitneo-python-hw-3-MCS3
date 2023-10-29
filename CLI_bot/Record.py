@@ -1,13 +1,17 @@
 from Phone import Phone
 from Name import Name
 from Exceptions import *
+from Birthday import Birthday
+
+
 
 
 class Record:
     def __init__(self, name):
         self.name = Name(name)
         self.phones = []
-
+        self.birthday = None
+        
     def add_phone(self, phone):
         self.phone = Phone(phone)
         if self.phone in self.phones:
@@ -41,13 +45,29 @@ class Record:
             if item == self.phone:
                 return record
         raise PhoneNumberNotFound
+    
+    def add_birthday(self, birthday):        
+        self.birthday = Birthday(birthday)
+        print(f"Birthday added to record '{self.name}'")
+
+    def show_birthday(self):
+        return self.birthday
+    
+    def show_name(self):
+        return str(self.name)
+    
+    def show_phones(self):
+        phone_str = ""
+        for phone in self.phones:
+            phone_str = phone_str + str(phone)
+        return phone_str
         
     
 
     def __str__(self):
-        return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
+        return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}, birthday: {self.birthday}"
     
-record = Record("Test")
+
     
 
 
